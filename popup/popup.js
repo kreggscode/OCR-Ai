@@ -12,9 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize Tesseract worker
     async function initWorker() {
         if (!worker) {
-            worker = await Tesseract.createWorker('eng', 1, {
-                workerPath: chrome.runtime.getURL('popup/worker.min.js')
-            });
+            worker = await Tesseract.createWorker('eng');
         }
     }
 
