@@ -14,21 +14,25 @@ A stunning Chrome extension that uses **Pollinations AI vision** to extract text
 ## ✨ Features
 
 ### 🔍 **Smart OCR Extraction**
+
 - **AI-Powered Vision**: Uses Pollinations AI's advanced vision models for accurate text extraction
 - **Image Support**: Works with JPG, PNG, and other common image formats
 - **Privacy-First**: Images processed securely via API, no local storage
 
 ### 🌍 **Global Translation**
+
 - **28 Languages**: Translate to English, French, Spanish, German, Chinese, Japanese, Arabic, Russian, Korean, Hindi, and more!
 - **AI Precision**: Context-aware translations powered by GPT models
 - **Instant Results**: Get translations in seconds
 
 ### ✨ **AI Text Simplification**
+
 - **Smart Simplification**: Make complex text easy to understand
 - **Educational Focus**: Perfect for learning and accessibility
 - **Creative Output**: Temperature-tuned for natural, readable results
 
 ### 🎨 **Beautiful UI/UX**
+
 - **Dark/Light Mode**: Toggle between themes with a single click
 - **Drag & Drop**: Intuitive file upload interface
 - **Responsive Design**: Works perfectly in Chrome's extension popup
@@ -36,6 +40,7 @@ A stunning Chrome extension that uses **Pollinations AI vision** to extract text
 - **Copy to Clipboard**: One-click text copying
 
 ### 🔒 **Privacy & Security**
+
 - **Zero Permissions**: No access to your browsing data
 - **API-Only Calls**: Secure communication with Pollinations AI
 - **No Data Storage**: Your images and text are not saved
@@ -44,11 +49,13 @@ A stunning Chrome extension that uses **Pollinations AI vision** to extract text
 ## 🚀 Installation
 
 ### From Chrome Web Store (Coming Soon)
+
 1. Visit the [Chrome Web Store](https://chromewebstore.google.com/)
 2. Search for "OCR & Translation Toolbox"
 3. Click **Add to Chrome**
 
 ### Manual Installation (Developer Mode)
+
 1. **Download** or clone this repository
 2. Open Chrome and go to `chrome://extensions/`
 3. Enable **Developer mode** (toggle in top right)
@@ -68,11 +75,13 @@ A stunning Chrome extension that uses **Pollinations AI vision** to extract text
 7. **📋 Copy**: Use the copy button to save results
 
 ### Supported File Types
+
 - ✅ JPEG, PNG, GIF, BMP, WebP
 - ✅ Screenshots and camera photos
 - ✅ High-resolution images
 
 ### Tips for Best Results
+
 - 📸 **Clear Images**: Better quality = better OCR accuracy
 - 📝 **Straight Text**: Avoid skewed or curved text
 - 🌟 **Good Lighting**: Well-lit photos work best
@@ -81,18 +90,21 @@ A stunning Chrome extension that uses **Pollinations AI vision** to extract text
 ## 🛠️ Technical Details
 
 ### AI Integration
+
 - **OCR Engine**: Pollinations AI Vision API (GPT-4o models)
 - **Translation/Simplification**: Pollinations AI Text API
 - **Temperature**: Set to 1.0 for creative, accurate outputs
 - **Rate Limiting**: Built-in delays to respect API limits
 
 ### Architecture
+
 - **Manifest V3**: Modern Chrome extension format
 - **Popup-Based**: Lightweight, no background processes
 - **Vanilla JS**: No external dependencies
 - **Inline CSS**: Reliable styling in extension context
 
 ### Browser Compatibility
+
 - ✅ Chrome 88+
 - ✅ Edge 88+
 - ✅ Opera 74+
@@ -103,12 +115,14 @@ A stunning Chrome extension that uses **Pollinations AI vision** to extract text
 We love contributions! Here's how you can help:
 
 ### Ways to Contribute
+
 - 🐛 **Bug Reports**: Found an issue? [Open an issue](https://github.com/kreggscode/OCR-Ai/issues)
 - 💡 **Feature Requests**: Have ideas? [Suggest features](https://github.com/kreggscode/OCR-Ai/discussions)
 - 🔧 **Code Contributions**: Fork, improve, and submit PRs
 - 📖 **Documentation**: Help improve this README or docs
 
 ### Development Setup
+
 ```bash
 # Clone the repo
 git clone https://github.com/kreggscode/OCR-Ai.git
