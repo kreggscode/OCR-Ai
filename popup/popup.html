@@ -12,9 +12,10 @@
     <h1 class="text-xl font-bold mb-4">OCR & Translation Toolbox</h1>
     <div id="dropArea" class="border-2 border-dashed border-gray-300 p-4 mb-4 text-center cursor-pointer hover:border-gray-400">
         Drag & drop an image or PDF here, or <label class="text-blue-500 cursor-pointer">browse</label>
-        <input type="file" id="fileInput" accept="image/*,.pdf" class="hidden">
+        <input type="file" id="fileInput" accept="image/*,.pdf" class="hidden" aria-label="Upload image or PDF file">
     </div>
     <textarea id="outputText" placeholder="Extracted text will appear here..." class="w-full h-32 p-2 border rounded mb-4" readonly></textarea>
+    <label for="language" class="block text-sm font-medium mb-2">Target Language:</label>
     <select id="language" class="w-full p-2 border rounded mb-4">
         <option value="French">French</option>
         <option value="Spanish">Spanish</option>
