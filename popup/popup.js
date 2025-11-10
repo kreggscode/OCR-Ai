@@ -32,6 +32,11 @@ document.addEventListener('DOMContentLoaded', () => {
         if (files.length) handleFile(files[0]);
     });
 
+    // Click to browse
+    dropArea.addEventListener('click', () => {
+        fileInput.click();
+    });
+
     // File input
     fileInput.addEventListener('change', (e) => {
         if (e.target.files.length) handleFile(e.target.files[0]);
