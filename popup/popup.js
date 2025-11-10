@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const translateBtn = document.getElementById('translateBtn');
     const simplifyBtn = document.getElementById('simplifyBtn');
     const status = document.getElementById('status');
+    const loading = document.getElementById('loading');
     const language = document.getElementById('language');
 
     let worker = null;
@@ -49,6 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     async function handleFile(file) {
         status.textContent = 'Processing file...';
+        loading.classList.remove('hidden');
         outputText.value = '';
         translateBtn.disabled = true;
         simplifyBtn.disabled = true;
@@ -68,7 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
-                        model: 'gpt-4-vision-preview',
+                        model: 'gpt-4o',
                         messages: [
                             {
                                 role: 'user',
@@ -99,12 +101,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
             outputText.value = extractedText || 'No text found in the file.';
             status.textContent = 'Text extracted successfully!';
+            loading.classList.add('hidden');
             translateBtn.disabled = false;
             simplifyBtn.disabled = false;
         } catch (error) {
             console.error('Error processing file:', error);
             outputText.value = 'Error processing file. Please try again.';
             status.textContent = 'Error occurred.';
+            loading.classList.add('hidden');
         }
     }
 
