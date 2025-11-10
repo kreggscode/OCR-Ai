@@ -115,10 +115,14 @@
 
             // Text
             ctx.fillStyle = textColor;
-            const fontSize = Math.min(48, 128 / text.length * 2);
+            let fontSize = 48;
             ctx.font = `bold ${fontSize}px Arial`;
-            ctx.textAlign = 'center';
-            ctx.textBaseline = 'middle';
+            let textWidth = ctx.measureText(text).width;
+            while (textWidth > 128 * 0.9 && fontSize > 8) {
+                fontSize -= 1;
+                ctx.font = `bold ${fontSize}px Arial`;
+                textWidth = ctx.measureText(text).width;
+            }
             ctx.fillText(text, 64, 64);
         }
 
@@ -148,10 +152,14 @@
 
                 // Text
                 ctx2.fillStyle = textColor;
-                const fontSize = Math.min(size * 0.75, size / text.length * 2);
+                let fontSize = size * 0.8;
                 ctx2.font = `bold ${fontSize}px Arial`;
-                ctx2.textAlign = 'center';
-                ctx2.textBaseline = 'middle';
+                let textWidth = ctx2.measureText(text).width;
+                while (textWidth > size * 0.9 && fontSize > 8) {
+                    fontSize -= 1;
+                    ctx2.font = `bold ${fontSize}px Arial`;
+                    textWidth = ctx2.measureText(text).width;
+                }
                 ctx2.fillText(text, size / 2, size / 2);
 
                 canvas.toBlob(blob => {
