@@ -3,8 +3,8 @@
   "name": "OCR & Translation Toolbox",
   "version": "1.0",
   "description": "Extract text from images or screenshots, then offer instant translation or AI-based simplification.",
-  "permissions": ["activeTab", "storage"],
-  "host_permissions": ["https://text.pollinations.ai/*", "https://image.pollinations.ai/*"],
+  "permissions": ["storage"],
+  "host_permissions": ["https://text.pollinations.ai/*"],
   "action": {
     "default_popup": "popup/popup.html",
     "default_title": "OCR & Translation Toolbox"
