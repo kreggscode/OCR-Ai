@@ -10,13 +10,13 @@ document.addEventListener('DOMContentLoaded', () => {
     let worker = null;
 
     // Initialize Tesseract worker
-    // async function initWorker() {
-    //     if (!worker) {
-    //         worker = await Tesseract.createWorker('eng');
-    //     }
-    // }
+    async function initWorker() {
+        if (!worker) {
+            worker = await Tesseract.createWorker('eng');
+        }
+    }
 
-    // initWorker();
+    initWorker();
 
     // Load default language
     chrome.storage.sync.get(['defaultLanguage'], (result) => {
@@ -55,10 +55,40 @@ document.addEventListener('DOMContentLoaded', () => {
     simplifyBtn.addEventListener('click', () => processText('simplify'));
 
     async function handleFile(file) {
-        status.textContent = 'Processing file...';
-        outputText.value = 'OCR disabled due to Chrome CSP restrictions. Extension loads with stunning UI! Translation & simplification work. OCR can be added with approved method.';
-        translateBtn.disabled = false;
-        simplifyBtn.disabled = false;
+        status.textContent = 'Initializing OCR...';
+        outputText.value = '';
+        translateBtn.disabled = true;
+        simplifyBtn.disabled = true;
+
+        try {
+            await initWorker();
+
+            let extractedText = '';
+
+            if (file.type.startsWith('image/')) {
+                // OCR image
+                const { data: { text } } = await worker.recognize(file);
+                extractedText = text;
+            } else if (file.type === 'application/pdf') {
+                // Extract text from PDF
+                const arrayBuffer = await file.arrayBuffer();
+                const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+                for (let i = 1; i <= Math.min(pdf.numPages, 10); i++) {
+                    const page = await pdf.getPage(i);
+                    const textContent = await page.getTextContent();
+                    extractedText += textContent.items.map(item => item.str).join(' ') + '\n';
+                }
+            }
+
+            outputText.value = extractedText || 'No text found in the file.';
+            status.textContent = 'Text extracted successfully!';
+            translateBtn.disabled = false;
+            simplifyBtn.disabled = false;
+        } catch (error) {
+            console.error('Error processing file:', error);
+            outputText.value = 'Error processing file. Please try again.';
+            status.textContent = 'Error occurred.';
+        }
     }
 
     // async function extractTextFromImage(file) {
