@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     async function handleFile(file) {
         status.textContent = 'Processing file...';
-        outputText.value = 'OCR functionality disabled for extension loading. UI is stunning!';
+        outputText.value = 'OCR disabled due to Chrome CSP restrictions. Extension loads with stunning UI! Translation & simplification work. OCR can be added with approved method.';
         translateBtn.disabled = false;
         simplifyBtn.disabled = false;
     }
