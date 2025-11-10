@@ -12,7 +12,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize Tesseract worker
     async function initWorker() {
         if (!worker) {
-            worker = await Tesseract.createWorker('eng');
+            worker = await Tesseract.createWorker('eng', 1, {
+                workerPath: chrome.runtime.getURL('popup/worker.min.js')
+            });
         }
     }
 
@@ -43,6 +45,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // File input
     fileInput.addEventListener('change', (e) => {
         if (e.target.files.length) handleFile(e.target.files[0]);
+    });
+
+    // Browse button
+    document.getElementById('browseBtn').addEventListener('click', () => {
+        fileInput.click();
     });
 
     // Buttons
