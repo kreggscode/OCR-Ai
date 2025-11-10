@@ -14,7 +14,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!worker) {
             worker = await Tesseract.createWorker('eng', 1, {
                 workerPath: chrome.runtime.getURL('popup/tesseract/dist/worker.min.js'),
-                corePath: chrome.runtime.getURL('popup/tesseract/dist/tesseract-core.wasm.js')
+                corePath: chrome.runtime.getURL('popup/tesseract/dist/tesseract-core.wasm.js'),
+                langPath: chrome.runtime.getURL('popup/tesseract/dist/')
             });
         }
     }
