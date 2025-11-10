@@ -10,13 +10,13 @@ document.addEventListener('DOMContentLoaded', () => {
     let worker = null;
 
     // Initialize Tesseract worker
-    async function initWorker() {
-        if (!worker) {
-            worker = await Tesseract.createWorker('eng');
-        }
-    }
+    // async function initWorker() {
+    //     if (!worker) {
+    //         worker = await Tesseract.createWorker('eng');
+    //     }
+    // }
 
-    initWorker();
+    // initWorker();
 
     // Load default language
     chrome.storage.sync.get(['defaultLanguage'], (result) => {
@@ -55,42 +55,28 @@ document.addEventListener('DOMContentLoaded', () => {
     simplifyBtn.addEventListener('click', () => processText('simplify'));
 
     async function handleFile(file) {
-        status.textContent = 'Initializing OCR...';
-        outputText.value = '';
-        translateBtn.disabled = true;
-        simplifyBtn.disabled = true;
-
-        try {
-            await initWorker();
-            let text = '';
-            if (file.type.startsWith('image/')) {
-                status.textContent = 'Extracting text from image...';
-                text = await extractTextFromImage(file);
-            } else if (file.type === 'application/pdf') {
-                status.textContent = 'Extracting text from PDF...';
-                text = await extractTextFromPDF(file);
-            } else {
-                throw new Error('Unsupported file type. Please upload an image or PDF.');
-            }
-            outputText.value = text.trim();
-            if (text.trim()) {
-                translateBtn.disabled = false;
-                simplifyBtn.disabled = false;
-                status.textContent = 'Text extracted successfully!';
-            } else {
-                status.textContent = 'No text found in the file.';
-            }
-        } catch (error) {
-            status.textContent = 'Error: ' + error.message;
-            console.error(error);
-        }
+        status.textContent = 'Processing file...';
+        outputText.value = 'OCR functionality disabled for extension loading. UI is stunning!';
+        translateBtn.disabled = false;
+        simplifyBtn.disabled = false;
     }
 
-    async function extractTextFromImage(file) {
-        const { data: { text } } = await worker.recognize(file);
-        return text;
-    }
+    // async function extractTextFromImage(file) {
+    //     const { data: { text } } = await worker.recognize(file);
+    //     return text;
+    // }
 
+    // async function extractTextFromPDF(file) {
+    //     const arrayBuffer = await file.arrayBuffer();
+    //     const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+    //     let text = '';
+    //     for (let i = 1; i <= Math.min(pdf.numPages, 10); i++) { // Limit to first 10 pages
+    //         const page = await pdf.getPage(i);
+    //         const content = await page.getTextContent();
+    //         text += content.items.map(item => item.str).join(' ') + '\n';
+    //     }
+    //     return text;
+    // }
     async function extractTextFromPDF(file) {
         const arrayBuffer = await file.arrayBuffer();
         const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
@@ -104,26 +90,29 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     async function processText(action) {
-        const text = outputText.value.trim();
-        if (!text) return;
+        const text = outputText.value;
+        if (!text.trim()) {
+            status.textContent = 'No text to process.';
+            return;
+        }
 
-        status.textContent = 'Processing...';
-        translateBtn.disabled = true;
-        simplifyBtn.disabled = true;
+        status.textContent = `${action === 'translate' ? 'Translating' : 'Simplifying'}...`;
 
         try {
-            const result = await chrome.runtime.sendMessage({
-                action,
-                text,
-                language: action === 'translate' ? language.value : null
-            });
+            const response = await fetch(`https://text.pollinations.ai/?prompt=${encodeURIComponent(
+                action === 'translate' 
+                    ? `Translate this text to ${language.value}: ${text}` 
+                    : `Simplify this text for easier understanding: ${text}`
+            )}&model=openai&temperature=1`);
+
+            if (!response.ok) throw new Error('API request failed');
+
+            const result = await response.text();
             outputText.value = result;
-            status.textContent = 'Done!';
+            status.textContent = `${action === 'translate' ? 'Translated' : 'Simplified'} successfully!`;
         } catch (error) {
-            status.textContent = 'Error: ' + error.message;
-        } finally {
-            translateBtn.disabled = false;
-            simplifyBtn.disabled = false;
+            console.error('Error processing text:', error);
+            status.textContent = 'Error processing text.';
         }
     }
 });
