@@ -9,14 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let worker = null;
 
-    // Initialize Tesseract worker
-    async function initWorker() {
-        if (!worker) {
-            worker = await Tesseract.createWorker('eng');
-        }
-    }
-
-    initWorker();
+    // No need for Tesseract worker
 
     // Load default language
     chrome.storage.sync.get(['defaultLanguage'], (result) => {
@@ -55,22 +48,46 @@ document.addEventListener('DOMContentLoaded', () => {
     simplifyBtn.addEventListener('click', () => processText('simplify'));
 
     async function handleFile(file) {
-        status.textContent = 'Initializing OCR...';
+        status.textContent = 'Processing file...';
         outputText.value = '';
         translateBtn.disabled = true;
         simplifyBtn.disabled = true;
 
         try {
-            await initWorker();
-
             let extractedText = '';
 
             if (file.type.startsWith('image/')) {
-                // OCR image
-                const { data: { text } } = await worker.recognize(file);
-                extractedText = text;
+                // OCR image using Pollinations AI vision
+                status.textContent = 'Extracting text from image...';
+                const reader = new FileReader();
+                const base64 = await new Promise((resolve) => {
+                    reader.onload = () => resolve(reader.result);
+                    reader.readAsDataURL(file);
+                });
+                const response = await fetch('https://text.pollinations.ai/openai', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        model: 'gpt-4-vision-preview',
+                        messages: [
+                            {
+                                role: 'user',
+                                content: [
+                                    { type: 'text', text: 'Extract all visible text from this image. Return only the text, no explanations.' },
+                                    { type: 'image_url', image_url: { url: base64 } }
+                                ]
+                            }
+                        ],
+                        max_tokens: 1000,
+                        temperature: 1
+                    })
+                });
+                if (!response.ok) throw new Error('Vision API failed');
+                const result = await response.json();
+                extractedText = result.choices[0].message.content;
             } else if (file.type === 'application/pdf') {
                 // Extract text from PDF
+                status.textContent = 'Extracting text from PDF...';
                 const arrayBuffer = await file.arrayBuffer();
                 const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
                 for (let i = 1; i <= Math.min(pdf.numPages, 10); i++) {
@@ -129,16 +146,23 @@ document.addEventListener('DOMContentLoaded', () => {
         status.textContent = `${action === 'translate' ? 'Translating' : 'Simplifying'}...`;
 
         try {
-            const response = await fetch(`https://text.pollinations.ai/?prompt=${encodeURIComponent(
-                action === 'translate' 
-                    ? `Translate this text to ${language.value}: ${text}` 
-                    : `Simplify this text for easier understanding: ${text}`
-            )}&model=openai&temperature=1`);
+            const response = await fetch('https://text.pollinations.ai/openai', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    model: 'openai',
+                    messages: [
+                        { role: 'system', content: action === 'translate' ? 'You are a translator.' : 'You simplify text.' },
+                        { role: 'user', content: action === 'translate' ? `Translate this text to ${language.value}: ${text}` : `Simplify this text: ${text}` }
+                    ],
+                    temperature: 1
+                })
+            });
 
             if (!response.ok) throw new Error('API request failed');
 
-            const result = await response.text();
-            outputText.value = result;
+            const result = await response.json();
+            outputText.value = result.choices[0].message.content;
             status.textContent = `${action === 'translate' ? 'Translated' : 'Simplified'} successfully!`;
         } catch (error) {
             console.error('Error processing text:', error);
