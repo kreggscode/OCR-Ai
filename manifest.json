@@ -5,6 +5,9 @@
   "description": "Extract text from images, screenshots, or PDFs, then offer instant translation or AI-based simplification.",
   "permissions": ["activeTab", "storage"],
   "host_permissions": ["https://text.pollinations.ai/*"],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self' https://unpkg.com; object-src 'self'"
+  },
   "action": {
     "default_popup": "popup/popup.html",
     "default_title": "OCR & Translation Toolbox"
