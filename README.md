@@ -1,3 +1,5 @@
+<div align="center">
+
 # 🧠 OCR & Translation Toolbox
 
 [![Chrome Web Store](https://img.shields.io/badge/Chrome%20Web%20Store-Coming%20Soon-blue?style=for-the-badge&logo=google-chrome)](https://chromewebstore.google.com/)
@@ -6,6 +8,8 @@
 [![Made with Love](https://img.shields.io/badge/Made%20with-❤️-red?style=for-the-badge)](https://github.com/kreggscode)
 
 > Extract text from images instantly, then translate or simplify with AI magic! 🌟
+
+</div>
 
 A stunning Chrome extension that uses **Pollinations AI vision** to extract text from images and screenshots, then provides instant translation into **28+ languages** or AI-powered text simplification. Features a beautiful dark/light mode toggle and drag-and-drop interface.
 
