@@ -4,83 +4,307 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Privacy Policy - OCR & Translation Toolbox</title>
+    <meta name="description" content="Privacy Policy for OCR & Translation Toolbox Chrome Extension. Learn how we protect your data and privacy.">
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛡️</text></svg>">
     <style>
-        body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; line-height: 1.6; }
-        h1, h2 { color: #333; }
-        .contact { background: #f5f5f5; padding: 15px; border-radius: 5px; margin: 20px 0; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.7;
+            color: #333;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+            border-radius: 15px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        .last-updated {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+        .intro {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            border-left: 5px solid #667eea;
+        }
+        .section {
+            background: white;
+            padding: 35px;
+            margin-bottom: 25px;
+            border-radius: 12px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.06);
+            transition: transform 0.2s;
+        }
+        .section:hover {
+            transform: translateY(-2px);
+        }
+        .section h2 {
+            color: #667eea;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        .section h3 {
+            color: #333;
+            font-size: 1.3rem;
+            margin: 25px 0 15px 0;
+        }
+        .section p {
+            margin-bottom: 15px;
+            color: #555;
+        }
+        .highlight-box {
+            background: linear-gradient(135deg, #e8f4f8 0%, #d1e8f0 100%);
+            border: 1px solid #b8d4e3;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .highlight-box strong {
+            color: #2c5aa0;
+        }
+        ul, ol {
+            margin: 15px 0 15px 25px;
+            color: #555;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+        .contact {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+        .contact h2 {
+            color: white;
+            margin-bottom: 20px;
+        }
+        .contact p {
+            margin-bottom: 15px;
+            opacity: 0.9;
+        }
+        .contact-info {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 15px 25px;
+            border-radius: 10px;
+            margin: 10px;
+        }
+        .back-link {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 12px 25px;
+            background: white;
+            color: #667eea;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        .back-link:hover {
+            background: #f8f9fa;
+            transform: translateY(-2px);
+        }
+        .footer {
+            text-align: center;
+            padding: 30px;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        @media (max-width: 768px) {
+            header h1 { font-size: 2.2rem; }
+            .container { padding: 15px; }
+            .section, .intro { padding: 25px; }
+            .contact { padding: 30px 20px; }
+        }
     </style>
 </head>
 <body>
-    <h1>Privacy Policy for OCR & Translation Toolbox</h1>
-    <p><strong>Last updated:</strong> November 10, 2025</p>
+    <header>
+        <div class="container">
+            <h1>🛡️ Privacy Policy</h1>
+            <div class="last-updated">Last updated: November 10, 2025</div>
+            <p>OCR & Translation Toolbox - Protecting Your Privacy</p>
+        </div>
+    </header>
 
-    <p>This privacy policy describes how OCR & Translation Toolbox ("we", "our", or "us") collects, uses, and protects your information when you use our Chrome extension.</p>
+    <div class="container">
+        <div class="intro">
+            <p><strong>Welcome to OCR & Translation Toolbox!</strong> We are committed to protecting your privacy and being transparent about how we handle your data. This privacy policy explains what information we collect, how we use it, and your rights regarding your data.</p>
 
-    <h2>Information We Collect</h2>
+            <p>Our extension processes images and text using AI technology while maintaining the highest standards of privacy and security. We believe in transparency, so we've made this policy clear and easy to understand.</p>
+        </div>
 
-    <p><strong>Images You Upload:</strong> When you use the extension to extract text from images, we temporarily process the images you upload. Images are converted to base64 format and sent to Pollinations AI for OCR processing.</p>
+        <section class="section">
+            <h2>🔍 Information We Collect</h2>
 
-    <p><strong>Text Data:</strong> The text extracted from your images and any text you choose to translate or simplify is sent to Pollinations AI for processing.</p>
+            <h3>Images You Upload</h3>
+            <p>When you use the extension to extract text from images, we temporarily process the images you upload. Images are converted to base64 format and sent to Pollinations AI for OCR processing.</p>
 
-    <p><strong>Technical Data:</strong> We may collect anonymous usage statistics to improve the extension, but this data cannot be used to identify individual users.</p>
+            <h3>Text Data</h3>
+            <p>The text extracted from your images and any text you choose to translate or simplify is sent to Pollinations AI for processing.</p>
 
-    <h2>How We Use Your Information</h2>
+            <h3>Technical Data</h3>
+            <p>We may collect anonymous usage statistics to improve the extension, but this data cannot be used to identify individual users.</p>
 
-    <ul>
-        <li>To provide OCR (Optical Character Recognition) services</li>
-        <li>To perform text translation and simplification</li>
-        <li>To improve and maintain the extension</li>
-        <li>To respond to support requests</li>
-    </ul>
+            <div class="highlight-box">
+                <strong>Important:</strong> We do not collect your name, email, location, browsing history, or any personally identifiable information. Our extension works entirely offline except for API calls to process your content.
+            </div>
+        </section>
 
-    <h2>Data Sharing and Third Parties</h2>
+        <section class="section">
+            <h2>🎯 How We Use Your Information</h2>
 
-    <p>We use Pollinations AI APIs to process your images and text. Your data is sent directly to their servers for processing. We do not store, sell, or share your personal data with any other third parties.</p>
+            <p>We use your information solely for providing the core functionality of the extension:</p>
 
-    <p><strong>Pollinations AI Privacy:</strong> Please refer to Pollinations AI's privacy policy at their website for details on how they handle data.</p>
+            <ul>
+                <li><strong>OCR Processing:</strong> To extract text from images using AI vision models</li>
+                <li><strong>Translation Services:</strong> To translate extracted text between languages</li>
+                <li><strong>Text Simplification:</strong> To make complex text more readable</li>
+                <li><strong>Service Improvement:</strong> To enhance the extension's performance and features</li>
+                <li><strong>Support:</strong> To respond to user questions and resolve issues</li>
+            </ul>
+        </section>
 
-    <h2>Data Security</h2>
+        <section class="section">
+            <h2>🤝 Data Sharing and Third Parties</h2>
 
-    <p>We implement appropriate technical and organizational measures to protect your data:</p>
+            <p>We partner with Pollinations AI to provide our OCR, translation, and simplification services. Here's how data sharing works:</p>
 
-    <ul>
-        <li>No local storage of images or text</li>
-        <li>Secure HTTPS communication with APIs</li>
-        <li>Images are processed temporarily and not retained</li>
-        <li>No user accounts or personal data collection</li>
-    </ul>
+            <h3>Pollinations AI Integration</h3>
+            <ul>
+                <li>Your images are sent directly to Pollinations AI for processing</li>
+                <li>Extracted text is sent for translation/simplification</li>
+                <li>We do not store or retain your data</li>
+                <li>Data is processed securely via HTTPS</li>
+            </ul>
 
-    <h2>Data Retention</h2>
+            <p><strong>We never sell, trade, or rent your personal information to third parties.</strong> The only data sharing occurs with our AI processing partner, which is necessary for the extension to function.</p>
 
-    <p>We do not store your images, extracted text, or any personal information. All processing is done in real-time and data is not retained on our servers.</p>
+            <div class="highlight-box">
+                <p><strong>Pollinations AI Privacy:</strong> For more information about how Pollinations AI handles data, please visit their privacy policy at their official website.</p>
+            </div>
+        </section>
 
-    <h2>Your Rights</h2>
+        <section class="section">
+            <h2>🔐 Data Security</h2>
 
-    <p>You have the right to:</p>
+            <p>Your privacy and security are our top priorities. We implement multiple layers of protection:</p>
 
-    <ul>
-        <li>Stop using the extension at any time</li>
-        <li>Request information about how your data is processed</li>
-        <li>Contact us with privacy concerns</li>
-    </ul>
+            <ul>
+                <li><strong>No Local Storage:</strong> Images and text are never stored on your device</li>
+                <li><strong>Secure Transmission:</strong> All data is sent via HTTPS encryption</li>
+                <li><strong>Temporary Processing:</strong> Data is processed in real-time and not retained</li>
+                <li><strong>Minimal Permissions:</strong> Extension requests only necessary access</li>
+                <li><strong>Anonymous Usage:</strong> Any analytics data is completely anonymous</li>
+            </ul>
 
-    <h2>Children's Privacy</h2>
+            <p>We regularly review and update our security measures to protect your data.</p>
+        </section>
 
-    <p>This extension is not intended for children under 13. We do not knowingly collect personal information from children under 13.</p>
+        <section class="section">
+            <h2>⏰️ Data Retention</h2>
 
-    <h2>Changes to This Policy</h2>
+            <p><strong>We do not retain your data.</strong></p>
 
-    <p>We may update this privacy policy from time to time. Any changes will be posted on this page with an updated revision date.</p>
+            <ul>
+                <li>Images are processed temporarily and immediately discarded</li>
+                <li>Extracted text is only kept during your session</li>
+                <li>No data is stored in browser storage or on servers</li>
+                <li>All processing happens in real-time</li>
+            </ul>
 
-    <h2>Contact Us</h2>
+            <p>Your privacy is protected because we simply don't keep your information.</p>
+        </section>
 
-    <div class="contact">
-        <p>If you have any questions about this privacy policy, please contact us:</p>
-        <p><strong>Email:</strong> kreg9da@gmail.com</p>
-        <p><strong>GitHub:</strong> <a href="https://github.com/kreggscode/OCR-Ai">https://github.com/kreggscode/OCR-Ai</a></p>
-        <p><strong>Issues:</strong> <a href="https://github.com/kreggscode/OCR-Ai/issues">https://github.com/kreggscode/OCR-Ai/issues</a></p>
+        <section class="section">
+            <h2>👤 Your Rights</h2>
+
+            <p>You have complete control over your data and how our extension works:</p>
+
+            <ul>
+                <li><strong>Stop Using:</strong> You can disable or remove the extension at any time</li>
+                <li><strong>Data Control:</strong> Only upload images you want processed</li>
+                <li><strong>Transparency:</strong> Ask us about how your data is handled</li>
+                <li><strong>Contact Us:</strong> Reach out with any privacy concerns</li>
+                <li><strong>Legal Rights:</strong> You have rights under applicable privacy laws</li>
+            </ul>
+        </section>
+
+        <section class="section">
+            <h2>👶 Children's Privacy</h2>
+
+            <p>Our extension is designed for general audiences and is not intended for children under 13. We do not knowingly collect personal information from children under 13.</p>
+
+            <p>If you believe a child has provided us with personal information, please contact us immediately.</p>
+        </section>
+
+        <section class="section">
+            <h2>📝 Changes to This Policy</h2>
+
+            <p>We may update this privacy policy from time to time to reflect changes in our practices or for legal reasons. When we make changes, we will:</p>
+
+            <ul>
+                <li>Update the "Last updated" date at the top</li>
+                <li>Post the revised policy on this page</li>
+                <li>Notify users through our GitHub repository</li>
+            </ul>
+
+            <p>We encourage you to review this policy periodically to stay informed about how we protect your data.</p>
+        </section>
+
+        <div class="contact">
+            <h2>📞 Contact Us</h2>
+            <p>Have questions about this privacy policy or our data practices? We're here to help!</p>
+
+            <div class="contact-info">
+                <strong>📧 Email:</strong><br>
+                kreg9da@gmail.com
+            </div>
+
+            <div class="contact-info">
+                <strong>🐙 GitHub:</strong><br>
+                <a href="https://github.com/kreggscode/OCR-Ai" style="color: white;">github.com/kreggscode/OCR-Ai</a>
+            </div>
+
+            <div class="contact-info">
+                <strong>🐛 Issues:</strong><br>
+                <a href="https://github.com/kreggscode/OCR-Ai/issues" style="color: white;">Report Privacy Concerns</a>
+            </div>
+
+            <a href="./index.html" class="back-link">← Back to Home</a>
+        </div>
+
+        <div class="footer">
+            <p>This privacy policy is effective as of November 10, 2025.</p>
+            <p>🧠 <strong>OCR & Translation Toolbox</strong> - Privacy First, AI Powered</p>
+        </div>
     </div>
-
-    <p>This privacy policy is effective as of November 10, 2025.</p>
 </body>
 </html>
