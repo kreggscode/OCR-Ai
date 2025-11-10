@@ -115,7 +115,8 @@
 
             // Text
             ctx.fillStyle = textColor;
-            ctx.font = 'bold 48px Arial';
+            const fontSize = Math.min(48, 128 / text.length * 2);
+            ctx.font = `bold ${fontSize}px Arial`;
             ctx.textAlign = 'center';
             ctx.textBaseline = 'middle';
             ctx.fillText(text, 64, 64);
@@ -147,7 +148,8 @@
 
                 // Text
                 ctx2.fillStyle = textColor;
-                ctx2.font = `bold ${size * 0.75}px Arial`;
+                const fontSize = Math.min(size * 0.75, size / text.length * 2);
+                ctx2.font = `bold ${fontSize}px Arial`;
                 ctx2.textAlign = 'center';
                 ctx2.textBaseline = 'middle';
                 ctx2.fillText(text, size / 2, size / 2);

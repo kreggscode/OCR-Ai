@@ -7,6 +7,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const status = document.getElementById('status');
     const language = document.getElementById('language');
 
+    let worker = null;
+
+    // Initialize Tesseract worker
+    async function initWorker() {
+        if (!worker) {
+            worker = await Tesseract.createWorker('eng');
+        }
+    }
+
+    initWorker();
+
     // Load default language
     chrome.storage.sync.get(['defaultLanguage'], (result) => {
         if (result.defaultLanguage) {
@@ -17,14 +28,14 @@ document.addEventListener('DOMContentLoaded', () => {
     // Drag and drop
     dropArea.addEventListener('dragover', (e) => {
         e.preventDefault();
-        dropArea.classList.add('border-blue-500');
+        dropArea.classList.add('border-indigo-500', 'bg-indigo-100');
     });
     dropArea.addEventListener('dragleave', () => {
-        dropArea.classList.remove('border-blue-500');
+        dropArea.classList.remove('border-indigo-500', 'bg-indigo-100');
     });
     dropArea.addEventListener('drop', (e) => {
         e.preventDefault();
-        dropArea.classList.remove('border-blue-500');
+        dropArea.classList.remove('border-indigo-500', 'bg-indigo-100');
         const files = e.dataTransfer.files;
         if (files.length) handleFile(files[0]);
     });
@@ -39,33 +50,39 @@ document.addEventListener('DOMContentLoaded', () => {
     simplifyBtn.addEventListener('click', () => processText('simplify'));
 
     async function handleFile(file) {
-        status.textContent = 'Processing...';
+        status.textContent = 'Initializing OCR...';
         outputText.value = '';
         translateBtn.disabled = true;
         simplifyBtn.disabled = true;
 
         try {
+            await initWorker();
             let text = '';
             if (file.type.startsWith('image/')) {
+                status.textContent = 'Extracting text from image...';
                 text = await extractTextFromImage(file);
             } else if (file.type === 'application/pdf') {
+                status.textContent = 'Extracting text from PDF...';
                 text = await extractTextFromPDF(file);
             } else {
-                throw new Error('Unsupported file type');
+                throw new Error('Unsupported file type. Please upload an image or PDF.');
             }
-            outputText.value = text;
+            outputText.value = text.trim();
             if (text.trim()) {
                 translateBtn.disabled = false;
                 simplifyBtn.disabled = false;
+                status.textContent = 'Text extracted successfully!';
+            } else {
+                status.textContent = 'No text found in the file.';
             }
-            status.textContent = 'Text extracted successfully.';
         } catch (error) {
             status.textContent = 'Error: ' + error.message;
+            console.error(error);
         }
     }
 
     async function extractTextFromImage(file) {
-        const { data: { text } } = await Tesseract.recognize(file, 'eng');
+        const { data: { text } } = await worker.recognize(file);
         return text;
     }
 
@@ -73,7 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const arrayBuffer = await file.arrayBuffer();
         const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
         let text = '';
-        for (let i = 1; i <= pdf.numPages; i++) {
+        for (let i = 1; i <= Math.min(pdf.numPages, 10); i++) { // Limit to first 10 pages
             const page = await pdf.getPage(i);
             const content = await page.getTextContent();
             text += content.items.map(item => item.str).join(' ') + '\n';
@@ -96,7 +113,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 language: action === 'translate' ? language.value : null
             });
             outputText.value = result;
-            status.textContent = 'Done.';
+            status.textContent = 'Done!';
         } catch (error) {
             status.textContent = 'Error: ' + error.message;
         } finally {
