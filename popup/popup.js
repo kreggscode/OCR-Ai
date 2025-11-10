@@ -8,16 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const loading = document.getElementById('loading');
     const language = document.getElementById('language');
 
-    let worker = null;
-
-    // Initialize Tesseract worker
-    async function initWorker() {
-        if (!worker) {
-            worker = await Tesseract.createWorker('eng');
-        }
-    }
-
-    initWorker();
+    // No need for Tesseract worker
 
     // Load default language
     chrome.storage.sync.get(['defaultLanguage'], (result) => {
@@ -71,20 +62,37 @@ document.addEventListener('DOMContentLoaded', () => {
             let extractedText = '';
 
             if (file.type.startsWith('image/')) {
-                // OCR image using Tesseract
+                // OCR image using Pollinations AI vision
                 document.getElementById('loadingText').textContent = 'Analyzing image...';
-                const { data: { text } } = await worker.recognize(file);
-                extractedText = text;
-            } else if (file.type === 'application/pdf') {
-                // Extract text from PDF
-                document.getElementById('loadingText').textContent = 'Extracting from PDF...';
-                const arrayBuffer = await file.arrayBuffer();
-                const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
-                for (let i = 1; i <= Math.min(pdf.numPages, 10); i++) {
-                    const page = await pdf.getPage(i);
-                    const textContent = await page.getTextContent();
-                    extractedText += textContent.items.map(item => item.str).join(' ') + '\n';
-                }
+                const reader = new FileReader();
+                const base64 = await new Promise((resolve) => {
+                    reader.onload = () => resolve(reader.result);
+                    reader.readAsDataURL(file);
+                });
+                const response = await fetch('https://text.pollinations.ai/openai', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        model: 'openai',
+                        messages: [
+                            {
+                                role: 'user',
+                                content: [
+                                    { type: 'text', text: 'Extract all visible text from this image. Return only the text, no explanations.' },
+                                    { type: 'image_url', image_url: { url: base64 } }
+                                ]
+                            }
+                        ],
+                        max_tokens: 1000,
+                        temperature: 1
+                    })
+                });
+                if (!response.ok) throw new Error('Vision API failed');
+                const result = await response.json();
+                extractedText = result.choices[0].message.content;
+            } else {
+                // Only images supported
+                extractedText = 'Only image files are supported for OCR.';
             }
 
             outputText.value = extractedText || 'No text found in the file.';
