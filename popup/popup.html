@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OCR & Translation Toolbox</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tesseract.js@4.0.2/dist/tesseract.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+</head>
+<body class="w-80 p-4 bg-gray-100">
+    <h1 class="text-xl font-bold mb-4">OCR & Translation Toolbox</h1>
+    <div id="dropArea" class="border-2 border-dashed border-gray-300 p-4 mb-4 text-center cursor-pointer hover:border-gray-400">
+        Drag & drop an image or PDF here, or <label class="text-blue-500 cursor-pointer">browse</label>
+        <input type="file" id="fileInput" accept="image/*,.pdf" class="hidden">
+    </div>
+    <textarea id="outputText" placeholder="Extracted text will appear here..." class="w-full h-32 p-2 border rounded mb-4" readonly></textarea>
+    <select id="language" class="w-full p-2 border rounded mb-4">
+        <option value="French">French</option>
+        <option value="Spanish">Spanish</option>
+        <option value="German">German</option>
+        <!-- Add more languages -->
+    </select>
+    <div class="flex gap-2">
+        <button id="translateBtn" class="flex-1 bg-blue-500 text-white p-2 rounded hover:bg-blue-600 disabled:opacity-50" disabled>Translate</button>
+        <button id="simplifyBtn" class="flex-1 bg-green-500 text-white p-2 rounded hover:bg-green-600 disabled:opacity-50" disabled>Simplify</button>
+    </div>
+    <div id="status" class="mt-4 text-sm text-gray-600"></div>
+    <script src="popup.js"></script>
+</body>
+</html>
