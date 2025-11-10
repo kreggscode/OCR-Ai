@@ -3,24 +3,84 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OCR & Translation Toolbox</title>
-    <style>
-        body { font-family: Arial, sans-serif; text-align: center; margin: 20px; }
-        h1 { color: #333; }
-        p { line-height: 1.6; max-width: 600px; margin: 0 auto; }
-    </style>
+    <title>OCR-AI - Extract, Translate, Simplify</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
-<body>
-    <h1>OCR & Translation Toolbox</h1>
-    <p>Extract text from images, screenshots, or PDFs instantly. Translate or simplify with AI-powered assistance right in your browser.</p>
-    <p>Features:</p>
-    <ul>
-        <li>Client-side OCR for privacy</li>
-        <li>Real-time translation in multiple languages</li>
-        <li>AI-based text simplification</li>
-        <li>Drag-and-drop file upload</li>
-    </ul>
-    <p>Download from the Chrome Web Store.</p>
-    <p><a href="privacy_policy.html">Privacy Policy</a> | <a href="terms_and_conditions.html">Terms and Conditions</a></p>
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen">
+    <header class="bg-white shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 py-6 flex justify-between items-center">
+            <h1 class="text-3xl font-bold text-indigo-600">OCR-AI</h1>
+            <nav class="space-x-6">
+                <a href="#features" class="text-gray-700 hover:text-indigo-600 transition">Features</a>
+                <a href="privacy_policy.html" class="text-gray-700 hover:text-indigo-600 transition">Privacy</a>
+                <a href="terms_and_conditions.html" class="text-gray-700 hover:text-indigo-600 transition">Terms</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 py-12">
+        <section class="text-center mb-16">
+            <h2 class="text-5xl font-extrabold text-gray-900 mb-4">Extract Text, Translate Instantly</h2>
+            <p class="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">Transform images and PDFs into editable text with AI-powered OCR, then translate or simplify with cutting-edge technology. All in your browser, privately.</p>
+            <a href="https://chromewebstore.google.com/" class="bg-indigo-600 text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-indigo-700 transition shadow-lg">Get OCR-AI Now</a>
+        </section>
+
+        <section id="features" class="grid md:grid-cols-3 gap-8 mb-16">
+            <div class="bg-white p-8 rounded-xl shadow-lg text-center">
+                <i class="fas fa-search text-4xl text-indigo-600 mb-4"></i>
+                <h3 class="text-2xl font-bold mb-4">Advanced OCR</h3>
+                <p class="text-gray-600">Extract text from images and PDFs with high accuracy, all processed locally for privacy.</p>
+            </div>
+            <div class="bg-white p-8 rounded-xl shadow-lg text-center">
+                <i class="fas fa-globe text-4xl text-indigo-600 mb-4"></i>
+                <h3 class="text-2xl font-bold mb-4">AI Translation</h3>
+                <p class="text-gray-600">Instantly translate extracted text into multiple languages using Pollinations AI.</p>
+            </div>
+            <div class="bg-white p-8 rounded-xl shadow-lg text-center">
+                <i class="fas fa-brain text-4xl text-indigo-600 mb-4"></i>
+                <h3 class="text-2xl font-bold mb-4">Text Simplification</h3>
+                <p class="text-gray-600">Simplify complex text into easy-to-understand versions with generative AI.</p>
+            </div>
+        </section>
+
+        <section class="bg-white p-8 rounded-xl shadow-lg">
+            <h2 class="text-3xl font-bold text-center mb-8">How It Works</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="text-center">
+                    <div class="bg-indigo-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-2xl font-bold text-indigo-600">1</span>
+                    </div>
+                    <h4 class="text-xl font-semibold mb-2">Upload</h4>
+                    <p class="text-gray-600">Drag and drop your image or PDF file.</p>
+                </div>
+                <div class="text-center">
+                    <div class="bg-indigo-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-2xl font-bold text-indigo-600">2</span>
+                    </div>
+                    <h4 class="text-xl font-semibold mb-2">Extract</h4>
+                    <p class="text-gray-600">AI extracts text accurately and instantly.</p>
+                </div>
+                <div class="text-center">
+                    <div class="bg-indigo-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-2xl font-bold text-indigo-600">3</span>
+                    </div>
+                    <h4 class="text-xl font-semibold mb-2">Transform</h4>
+                    <p class="text-gray-600">Translate or simplify with one click.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-gray-800 text-white py-8 mt-16">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <p>&copy; 2025 OCR-AI. Built with ❤️ for productivity.</p>
+            <div class="mt-4 space-x-6">
+                <a href="privacy_policy.html" class="hover:text-indigo-400 transition">Privacy Policy</a>
+                <a href="terms_and_conditions.html" class="hover:text-indigo-400 transition">Terms & Conditions</a>
+                <a href="https://github.com/kreggscode/OCR-Ai" class="hover:text-indigo-400 transition">GitHub</a>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>
