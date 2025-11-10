@@ -5,14 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OCR-AI</title>
     <style>
-        body { width: 350px; height: auto; margin: 0; padding: 0; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        .card { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); overflow: hidden; margin: 10px; }
-        .header { background: linear-gradient(90deg, #ff6b6b 0%, #ffa500 100%); color: white; padding: 20px; text-align: center; position: relative; overflow: hidden; }
+        body { width: 350px; height: auto; margin: 0; padding: 0; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; transition: background 0.3s; }
+        body.dark { background: linear-gradient(135deg, #2d3748 0%, #1a202c 100%); }
+        .card { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); overflow: hidden; margin: 10px; transition: background 0.3s; }
+        body.dark .card { background: rgba(45, 55, 72, 0.95); }
+        .header { background: linear-gradient(90deg, #ff6b6b 0%, #ffa500 100%); color: white; padding: 20px; text-align: center; position: relative; overflow: hidden; transition: background 0.3s; }
+        body.dark .header { background: linear-gradient(90deg, #e53e3e 0%, #ed8936 100%); }
         .header::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent); animation: shine 3s infinite; }
         @keyframes shine { 0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); } 100% { transform: translateX(100%) translateY(100%) rotate(45deg); } }
         .upload-area { border: 3px dashed #667eea; border-radius: 15px; padding: 30px; text-align: center; cursor: pointer; background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); transition: all 0.4s ease; position: relative; overflow: hidden; }
+        body.dark .upload-area { border-color: #4a5568; background: linear-gradient(135deg, #2d3748 0%, #4a5568 100%); }
         .upload-area:hover { border-color: #764ba2; background: linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 100%); transform: scale(1.02); box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+        body.dark .upload-area:hover { border-color: #718096; background: linear-gradient(135deg, #4a5568 0%, #718096 100%); }
         .upload-area::before { content: '📁'; font-size: 50px; display: block; margin-bottom: 10px; animation: bounce 2s infinite; }
+        @keyframes bounce { 0%, 20%, 50%, 80%, 100% { transform: translateY(0); } 40% { transform: translateY(-10px); } 60% { transform: translateY(-5px); } }
+        .theme-btn { position: absolute; top: 10px; right: 10px; background: none; border: none; color: white; font-size: 20px; cursor: pointer; transition: transform 0.2s; }
+        .theme-btn:hover { transform: scale(1.1); }
         @keyframes bounce { 0%, 20%, 50%, 80%, 100% { transform: translateY(0); } 40% { transform: translateY(-10px); } 60% { transform: translateY(-5px); } }
         .btn { padding: 14px 20px; border-radius: 12px; font-weight: 600; display: inline-flex; align-items: center; justify-content: center; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.1); border: none; cursor: pointer; font-size: 14px; }
         .btn:hover:not(:disabled) { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(0,0,0,0.2); }
@@ -62,6 +70,7 @@
         <!-- Header -->
         <div class="header">
             <h1 class="text-xl">🧠 OCR-AI</h1>
+            <button id="themeToggle" class="theme-btn">🌙</button>
             <p class="text-sm opacity-90">Extract text from images instantly</p>
         </div>
 
@@ -95,6 +104,7 @@
                     🌍 Target Language
                 </label>
                 <select id="language" class="w-full p-3 border border-gray-300 rounded-lg">
+                    <option value="English">🇺🇸 English</option>
                     <option value="French">🇫🇷 French</option>
                     <option value="Spanish">🇪🇸 Spanish</option>
                     <option value="German">🇩🇪 German</option>
@@ -102,6 +112,26 @@
                     <option value="Portuguese">🇵🇹 Portuguese</option>
                     <option value="Chinese">🇨🇳 Chinese</option>
                     <option value="Japanese">🇯🇵 Japanese</option>
+                    <option value="Arabic">🇸🇦 Arabic</option>
+                    <option value="Russian">🇷🇺 Russian</option>
+                    <option value="Korean">🇰🇷 Korean</option>
+                    <option value="Hindi">🇮🇳 Hindi</option>
+                    <option value="Dutch">🇳🇱 Dutch</option>
+                    <option value="Swedish">🇸🇪 Swedish</option>
+                    <option value="Turkish">🇹🇷 Turkish</option>
+                    <option value="Polish">🇵🇱 Polish</option>
+                    <option value="Greek">🇬🇷 Greek</option>
+                    <option value="Hebrew">🇮🇱 Hebrew</option>
+                    <option value="Thai">🇹🇭 Thai</option>
+                    <option value="Vietnamese">🇻🇳 Vietnamese</option>
+                    <option value="Czech">🇨🇿 Czech</option>
+                    <option value="Danish">🇩🇰 Danish</option>
+                    <option value="Finnish">🇫🇮 Finnish</option>
+                    <option value="Norwegian">🇳🇴 Norwegian</option>
+                    <option value="Romanian">🇷🇴 Romanian</option>
+                    <option value="Slovak">🇸🇰 Slovak</option>
+                    <option value="Ukrainian">🇺🇦 Ukrainian</option>
+                    <option value="Bulgarian">🇧🇬 Bulgarian</option>
                 </select>
             </div>
 

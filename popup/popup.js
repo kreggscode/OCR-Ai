@@ -10,11 +10,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // No need for Tesseract worker
 
+    const themeToggle = document.getElementById('themeToggle');
+
     // Load default language
-    chrome.storage.sync.get(['defaultLanguage'], (result) => {
-        if (result.defaultLanguage) {
-            language.value = result.defaultLanguage;
-        }
+    language.value = 'English';
+
+    // Theme toggle
+    themeToggle.addEventListener('click', () => {
+        document.body.classList.toggle('dark');
+        themeToggle.textContent = document.body.classList.contains('dark') ? '☀️' : '🌙';
     });
 
     // Drag and drop
