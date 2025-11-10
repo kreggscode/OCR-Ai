@@ -1,0 +1,19 @@
+title: OCR & Translation Toolbox
+description: Extract text from images with AI-powered OCR and instant translation
+url: "https://kreggscode.github.io"
+baseurl: "/OCR-Ai"
+markdown: kramdown
+highlighter: rouge
+theme: jekyll-theme-primer
+plugins:
+  - jekyll-github-metadata
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+exclude:
+  - README.md
+  - extension_plan.md
+  - pollination ai.md
+
+include:
+  - _pages
