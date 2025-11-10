@@ -10,7 +10,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let worker = null;
 
-    // No need for Tesseract worker
+    // Initialize Tesseract worker
+    async function initWorker() {
+        if (!worker) {
+            worker = await Tesseract.createWorker('eng');
+        }
+    }
+
+    initWorker();
 
     // Load default language
     chrome.storage.sync.get(['defaultLanguage'], (result) => {
@@ -39,9 +46,14 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.target.files.length) handleFile(e.target.files[0]);
     });
 
-    // Browse button
-    document.getElementById('browseBtn').addEventListener('click', () => {
-        fileInput.click();
+    // Copy button
+    document.getElementById('copyBtn').addEventListener('click', () => {
+        navigator.clipboard.writeText(outputText.value).then(() => {
+            status.textContent = 'Text copied to clipboard!';
+            setTimeout(() => status.textContent = '', 2000);
+        }).catch(() => {
+            status.textContent = 'Failed to copy.';
+        });
     });
 
     // Buttons
@@ -59,37 +71,13 @@ document.addEventListener('DOMContentLoaded', () => {
             let extractedText = '';
 
             if (file.type.startsWith('image/')) {
-                // OCR image using Pollinations AI vision
-                status.textContent = 'Extracting text from image...';
-                const reader = new FileReader();
-                const base64 = await new Promise((resolve) => {
-                    reader.onload = () => resolve(reader.result);
-                    reader.readAsDataURL(file);
-                });
-                const response = await fetch('https://text.pollinations.ai/openai', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        model: 'gpt-4o',
-                        messages: [
-                            {
-                                role: 'user',
-                                content: [
-                                    { type: 'text', text: 'Extract all visible text from this image. Return only the text, no explanations.' },
-                                    { type: 'image_url', image_url: { url: base64 } }
-                                ]
-                            }
-                        ],
-                        max_tokens: 1000,
-                        temperature: 1
-                    })
-                });
-                if (!response.ok) throw new Error('Vision API failed');
-                const result = await response.json();
-                extractedText = result.choices[0].message.content;
+                // OCR image using Tesseract
+                document.getElementById('loadingText').textContent = 'Analyzing image...';
+                const { data: { text } } = await worker.recognize(file);
+                extractedText = text;
             } else if (file.type === 'application/pdf') {
                 // Extract text from PDF
-                status.textContent = 'Extracting text from PDF...';
+                document.getElementById('loadingText').textContent = 'Extracting from PDF...';
                 const arrayBuffer = await file.arrayBuffer();
                 const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
                 for (let i = 1; i <= Math.min(pdf.numPages, 10); i++) {
