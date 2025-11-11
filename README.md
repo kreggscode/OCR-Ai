@@ -2,7 +2,7 @@
 
 # 🧠 OCR & Translation Toolbox
 
-[![Chrome Web Store](https://img.shields.io/badge/Chrome%20Web%20Store-Coming%20Soon-blue?style=for-the-badge&logo=google-chrome)](https://chromewebstore.google.com/)
+[![Chrome Web Store](https://img.shields.io/badge/Chrome%20Web%20Store-Download-blue?style=for-the-badge&logo=google-chrome)](https://chromewebstore.google.com/detail/ocr-translation-toolbox/omjhhblcdpkcolgkbdpdmmfoonlfjmpl?authuser=0&hl=en)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
 [![GitHub stars](https://img.shields.io/github/stars/kreggscode/OCR-Ai?style=social)](https://github.com/kreggscode/OCR-Ai)
 [![Made with Love](https://img.shields.io/badge/Made%20with-❤️-red?style=for-the-badge)](https://github.com/kreggscode)
@@ -13,7 +13,7 @@
 
 A stunning Chrome extension that uses **Pollinations AI vision** to extract text from images and screenshots, then provides instant translation into **28+ languages** or AI-powered text simplification. Features a beautiful dark/light mode toggle and drag-and-drop interface.
 
-![Extension Preview](https://via.placeholder.com/800x400/667eea/ffffff?text=OCR+AI+Extension+Preview)
+![Extension Preview](./1.png)
 
 ## ✨ Features
 
@@ -52,7 +52,7 @@ A stunning Chrome extension that uses **Pollinations AI vision** to extract text
 
 ## 🚀 Installation
 
-### From Chrome Web Store (Coming Soon)
+### From Chrome Web Store
 
 1. Visit the [Chrome Web Store](https://chromewebstore.google.com/)
 2. Search for "OCR & Translation Toolbox"
